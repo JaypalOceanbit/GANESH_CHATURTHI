@@ -9,16 +9,16 @@
     <div>
         <h2 class="h3 fw-bold mb-0"><i class="bi bi-mortarboard-fill text-primary me-2"></i> Student Collection</h2>
     </div>
+    @auth
     <div class="d-flex flex-wrap gap-2 no-print">
         <a href="{{ route('students.export') }}" class="btn btn-outline-secondary btn-sm fw-medium flex-grow-1 flex-sm-grow-0">
             <i class="bi bi-file-earmark-spreadsheet me-1"></i> Export CSV
         </a>
-        @auth
         <a href="{{ route('students.create') }}" class="btn btn-primary btn-sm fw-bold flex-grow-1 flex-sm-grow-0">
             <i class="bi bi-plus-lg me-1"></i> Add Collection
         </a>
-        @endauth
     </div>
+    @endauth
 </div>
 
 <!-- Search & Filter Card -->

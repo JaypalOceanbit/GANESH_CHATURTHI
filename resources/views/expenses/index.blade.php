@@ -9,16 +9,16 @@
     <div>
         <h2 class="h3 fw-bold mb-0"><i class="bi bi-receipt-cutoff text-danger me-2"></i> Expenses</h2>
     </div>
+    @auth
     <div class="d-flex flex-wrap gap-2 no-print">
         <a href="{{ route('expenses.export', request()->all()) }}" class="btn btn-outline-secondary btn-sm fw-medium flex-grow-1 flex-sm-grow-0">
             <i class="bi bi-file-earmark-spreadsheet me-1"></i> Export CSV
         </a>
-        @auth
         <a href="{{ route('expenses.create') }}" class="btn btn-danger btn-sm fw-bold flex-grow-1 flex-sm-grow-0">
             <i class="bi bi-plus-lg me-1"></i> Add Expense
         </a>
-        @endauth
     </div>
+    @endauth
 </div>
 
 <!-- Expense Summary Stats Banner (2 per row on mobile) -->

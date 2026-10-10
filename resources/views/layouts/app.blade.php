@@ -589,7 +589,7 @@
                         <li><a class="dropdown-item py-2" href="{{ route('faculty.create') }}"><i class="bi bi-person-workspace me-2 text-success"></i> Faculty Collection</a></li>
                         <li><a class="dropdown-item py-2" href="{{ route('sponsors.create') }}"><i class="bi bi-gift me-2 text-warning"></i> Sponsor Contribution</a></li>
                         <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item py-2" href="{{ route('expenses.create') }}"><i class="bi bi-receipt me-2 text-danger"></i> Celebration Expense</a></li>
+                        <li><a class="dropdown-item py-2" href="{{ route('expenses.create') }}"><i class="bi bi-receipt me-2 text-danger"></i> Expense</a></li>
                     </ul>
                 </div>
 
@@ -609,19 +609,16 @@
                                 </button>
                             </form>
                         </li>
-                    </ul>
-                </div>
+                <!-- Print Button (Hidden on phones, visible only to Auth Admin) -->
+                <button onclick="window.print()" class="btn btn-sm btn-outline-secondary fw-semibold d-none d-sm-inline-flex align-items-center">
+                    <i class="bi bi-printer me-1"></i> Print
+                </button>
                 @else
                 <!-- Admin Login Button for Guests -->
                 <a href="{{ route('login') }}" class="btn btn-warning text-dark fw-bold btn-sm px-2.5 px-sm-3 py-1.5 shadow-sm">
                     <i class="bi bi-box-arrow-in-right me-1"></i> Admin Login
                 </a>
                 @endauth
-
-                <!-- Print Button (Hidden on phones) -->
-                <button onclick="window.print()" class="btn btn-sm btn-outline-secondary fw-semibold d-none d-sm-inline-flex align-items-center">
-                    <i class="bi bi-printer me-1"></i> Print
-                </button>
             </div>
         </header>
 

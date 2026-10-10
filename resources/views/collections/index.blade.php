@@ -9,11 +9,13 @@
     <div>
         <h2 class="h3 fw-bold mb-1"><i class="bi bi-journal-bookmark-fill text-amber me-2"></i> Combined Collection History</h2>
     </div>
+    @auth
     <div class="mt-3 mt-md-0 d-flex gap-2 no-print">
         <button onclick="window.print()" class="btn btn-outline-secondary btn-sm">
             <i class="bi bi-printer me-1"></i> Print History
         </button>
     </div>
+    @endauth
 </div>
 
 <!-- Stats Banner -->
