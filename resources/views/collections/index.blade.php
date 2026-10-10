@@ -17,23 +17,25 @@
 </div>
 
 <!-- Stats Banner -->
-<div class="row g-3 mb-4">
-    <div class="col-12 col-md-4">
-        <div class="card card-custom p-3 border-start border-4 border-warning">
+<div class="row g-2 g-sm-3 mb-4">
+    <div class="col-12 col-sm-12 col-md-4">
+        <div class="card card-custom p-3 border-start border-4 border-warning h-100">
             <span class="text-muted small fw-bold text-uppercase">Total Collection</span>
-            <h4 class="fw-bold mb-0 text-dark">₹{{ number_format($totalCollection, 0) }}</h4>
+            <h4 class="fw-bold mb-0 text-dark mt-1">₹{{ number_format($totalCollection, 0) }}</h4>
         </div>
     </div>
-    <div class="col-12 col-sm-6 col-md-4">
-        <div class="card card-custom p-3">
-            <span class="text-muted small fw-bold text-uppercase">Student Collections</span>
-            <h4 class="fw-bold mb-0 text-primary">₹{{ number_format($studentTotal, 0) }} <small class="fs-6 text-muted">({{ $studentCount }} contributors)</small></h4>
+    <div class="col-6 col-sm-6 col-md-4">
+        <div class="card card-custom p-3 h-100">
+            <span class="text-muted small fw-bold text-uppercase text-truncate d-block">Student Collections</span>
+            <h4 class="fw-bold mb-0 text-primary mt-1">₹{{ number_format($studentTotal, 0) }}</h4>
+            <small class="text-muted fw-semibold">({{ $studentCount }} contributors)</small>
         </div>
     </div>
-    <div class="col-12 col-sm-6 col-md-4">
-        <div class="card card-custom p-3">
-            <span class="text-muted small fw-bold text-uppercase">Faculty Collections</span>
-            <h4 class="fw-bold mb-0 text-success">₹{{ number_format($facultyTotal, 0) }} <small class="fs-6 text-muted">({{ $facultyCount }} faculty)</small></h4>
+    <div class="col-6 col-sm-6 col-md-4">
+        <div class="card card-custom p-3 h-100">
+            <span class="text-muted small fw-bold text-uppercase text-truncate d-block">Faculty Collections</span>
+            <h4 class="fw-bold mb-0 text-success mt-1">₹{{ number_format($facultyTotal, 0) }}</h4>
+            <small class="text-muted fw-semibold">({{ $facultyCount }} faculty)</small>
         </div>
     </div>
 </div>
@@ -42,10 +44,10 @@
 <div class="card card-custom p-3 mb-4 no-print">
     <form action="{{ route('collections.index') }}" method="GET" class="row g-2 align-items-center">
         <!-- Type Tabs -->
-        <div class="col-12 col-md-5">
-            <div class="btn-group w-100" role="group">
+        <div class="col-12 col-md-6">
+            <div class="mobile-flex-tabs" role="group">
                 <a href="{{ route('collections.index', ['type' => 'all', 'search' => $search]) }}" class="btn btn-sm {{ $type === 'all' ? 'btn-warning text-dark fw-bold' : 'btn-outline-secondary' }}">
-                    All Contributors ({{ $totalContributors }})
+                    All ({{ $totalContributors }})
                 </a>
                 <a href="{{ route('collections.index', ['type' => 'students', 'search' => $search]) }}" class="btn btn-sm {{ $type === 'students' ? 'btn-primary fw-bold' : 'btn-outline-secondary' }}">
                     Students ({{ $studentCount }})
@@ -57,15 +59,15 @@
         </div>
 
         <!-- Search Input -->
-        <div class="col-12 col-md-5">
-            <input type="text" name="search" class="form-control form-control-sm" placeholder="Search" value="{{ $search }}">
+        <div class="col-12 col-sm-8 col-md-4">
+            <input type="text" name="search" class="form-control" placeholder="Search by name..." value="{{ $search }}">
             <input type="hidden" name="type" value="{{ $type }}">
         </div>
 
-        <div class="col-12 col-md-2 d-flex gap-1">
-            <button type="submit" class="btn btn-sm btn-dark flex-grow-1">Search</button>
+        <div class="col-12 col-sm-4 col-md-2 d-flex gap-1">
+            <button type="submit" class="btn btn-dark flex-grow-1 fw-bold"><i class="bi bi-search me-1"></i> Search</button>
             @if($search)
-                <a href="{{ route('collections.index', ['type' => $type]) }}" class="btn btn-sm btn-light border"><i class="bi bi-x"></i></a>
+                <a href="{{ route('collections.index', ['type' => $type]) }}" class="btn btn-light border"><i class="bi bi-x-lg"></i></a>
             @endif
         </div>
     </form>
@@ -93,8 +95,8 @@
             <tbody>
                 @forelse($students as $st)
                     <tr>
-                        <td class="fw-bold text-muted">{{ $loop->iteration }}</td>
-                        <td class="fw-bold text-dark">
+                        <td class="fw text-muted">{{ $loop->iteration }}</td>
+                        <td class="fw text-dark">
                             {{ $st->name }}
                             @if($st->is_group)
                                 <span class="badge bg-info-subtle text-info-emphasis border ms-1">Group</span>
@@ -104,7 +106,7 @@
                             @endif
                         </td>
                         <!-- <td><span class="badge bg-primary-subtle text-primary border px-2 py-1">{{ $st->room }}</span></td> -->
-                        <td class="text-end fw-bold text-success">₹{{ number_format($st->amount, 0) }}</td>
+                        <td class="text-end fw text-success">₹{{ number_format($st->amount, 0) }}</td>
                         <!-- <td class="text-muted small">{{ $st->collection_date ? $st->collection_date->format('d/m/Y') : 'N/A' }}</td> -->
                         <!-- <td class="text-muted small">{{ $st->notes ?: '—' }}</td> -->
                     </tr>
@@ -140,8 +142,8 @@
             <tbody>
                 @forelse($faculty as $fc)
                     <tr>
-                        <td class="fw-bold text-muted">{{ $loop->iteration }}</td>
-                        <td class="fw-bold text-dark">{{ $fc->name }}</td>
+                        <td class="fw text-muted">{{ $loop->iteration }}</td>
+                        <td class="fw text-dark">{{ $fc->name }}</td>
                         <td>
                             @if($fc->sponsor)
                                 <span class="badge bg-success-subtle text-success border px-2 py-1">{{ $fc->sponsor }}</span>
@@ -149,7 +151,7 @@
                                 <span class="text-muted small">—</span>
                             @endif
                         </td>
-                        <td class="text-end fw-bold text-success">₹{{ number_format($fc->amount, 0) }}</td>
+                        <td class="text-end fw text-success">₹{{ number_format($fc->amount, 0) }}</td>
                         <!-- <td class="text-muted small">{{ $fc->collection_date ? $fc->collection_date->format('d/m/Y') : 'N/A' }}</td> -->
                         <!-- <td class="text-muted small">{{ $fc->notes ?: '—' }}</td> -->
                     </tr>

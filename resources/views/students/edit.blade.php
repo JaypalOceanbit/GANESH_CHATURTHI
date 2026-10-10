@@ -88,9 +88,9 @@
                 </div>
 
                 <!-- Action Buttons -->
-                <div class="d-flex justify-content-end gap-2">
-                    <a href="{{ route('students.index') }}" class="btn btn-light border px-4">Cancel</a>
-                    <button type="submit" class="btn btn-primary px-4 fw-bold">
+                <div class="d-flex flex-column-reverse flex-sm-row justify-content-end gap-2 mt-4">
+                    <a href="{{ route('students.index') }}" class="btn btn-light border px-4 w-100 w-sm-auto">Cancel</a>
+                    <button type="submit" class="btn btn-primary px-4 fw-bold w-100 w-sm-auto">
                         <i class="bi bi-save me-1"></i> Update Record
                     </button>
                 </div>

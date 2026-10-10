@@ -101,6 +101,25 @@
             background: #fafafa;
             border-top: 1px solid #f1f5f9;
         }
+
+        @media (max-width: 575.98px) {
+            body {
+                padding: 1rem 0.75rem;
+            }
+            .login-header {
+                padding: 1.75rem 1.25rem 1.25rem 1.25rem;
+            }
+            .login-body {
+                padding: 1.25rem;
+            }
+            .login-footer {
+                padding: 1rem 1.25rem 1.5rem 1.25rem;
+            }
+            .form-control {
+                font-size: 16px !important;
+                min-height: 44px;
+            }
+        }
     </style>
 </head>
 <body>

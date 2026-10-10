@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>@yield('title', 'Ganesh Chaturthi Celebration 2026') — Collection & Expense Tracker</title>
 
@@ -19,7 +19,7 @@
     <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
-    <!-- Premium Custom Styling -->
+    <!-- Fully Responsive Custom Styling -->
     <style>
         :root {
             --sidebar-width: 260px;
@@ -33,7 +33,9 @@
             --amber-badge: #fef3c7;
         }
 
-        body {
+        html, body {
+            max-width: 100vw;
+            overflow-x: hidden;
             font-family: 'Plus Jakarta Sans', sans-serif;
             background-color: var(--bg-body);
             color: #1e293b;
@@ -46,7 +48,7 @@
             font-family: 'Outfit', sans-serif;
         }
 
-        /* Scrollbar Polish */
+        /* Smooth Scrollbars */
         ::-webkit-scrollbar {
             width: 6px;
             height: 6px;
@@ -62,7 +64,7 @@
             background: #94a3b8;
         }
 
-        /* Light & Bright Sidebar */
+        /* Sidebar Styling */
         .sidebar {
             width: var(--sidebar-width);
             background: var(--sidebar-bg);
@@ -72,14 +74,14 @@
             top: 0;
             bottom: 0;
             left: 0;
-            z-index: 1000;
+            z-index: 1050;
             display: flex;
             flex-direction: column;
-            transition: all 0.25s ease;
+            transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .sidebar-brand {
-            padding: 1.25rem 1.25rem;
+            padding: 1.15rem 1.15rem;
             border-bottom: 1px solid #f1f5f9;
             background: linear-gradient(180deg, #fffbeb 0%, #ffffff 100%);
         }
@@ -100,7 +102,7 @@
         }
 
         .sidebar-nav {
-            padding: 1rem 0.75rem;
+            padding: 0.85rem 0.65rem;
             flex-grow: 1;
             overflow-y: auto;
         }
@@ -157,20 +159,42 @@
             color: #d97706;
         }
 
+        /* Mobile Sidebar Backdrop Overlay */
+        .sidebar-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(15, 23, 42, 0.45);
+            backdrop-filter: blur(2px);
+            z-index: 1040;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.25s ease, visibility 0.25s ease;
+        }
+
+        .sidebar-overlay.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
         /* Main Wrapper */
         .main-wrapper {
             margin-left: var(--sidebar-width);
             min-height: 100vh;
             display: flex;
             flex-direction: column;
-            transition: all 0.25s ease;
+            width: calc(100% - var(--sidebar-width));
+            max-width: 100%;
+            transition: margin-left 0.25s ease, width 0.25s ease;
         }
 
-        /* Top Header Bar */
+        /* Sticky Topbar */
         .main-topbar {
             background: #ffffff;
             border-bottom: 1px solid #e2e8f0;
-            padding: 0.85rem 1.5rem;
+            padding: 0.75rem 1.25rem;
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -182,19 +206,20 @@
 
         .topbar-title {
             font-weight: 800;
-            font-size: 1.25rem;
+            font-size: clamp(1rem, 2.5vw, 1.25rem);
             color: #0f172a;
             margin: 0;
+            line-height: 1.25;
             letter-spacing: -0.3px;
         }
 
         .topbar-subtitle {
-            font-size: 0.82rem;
+            font-size: 0.8rem;
             color: #64748b;
             font-weight: 500;
         }
 
-        /* UI Cards & Metric Cards */
+        /* UI Cards & Containers */
         .ui-card {
             background: #ffffff;
             border: 1px solid #e2e8f0;
@@ -206,7 +231,7 @@
         .ui-card-header {
             background: #ffffff;
             border-bottom: 1px solid #f1f5f9;
-            padding: 1rem 1.25rem;
+            padding: 0.9rem 1.15rem;
             border-top-left-radius: var(--card-radius);
             border-top-right-radius: var(--card-radius);
         }
@@ -215,7 +240,7 @@
             background: #ffffff;
             border: 1px solid #e2e8f0;
             border-radius: var(--card-radius);
-            padding: 1.25rem;
+            padding: 1rem 1.15rem;
             box-shadow: var(--card-shadow);
             height: 100%;
             transition: transform 0.2s ease, box-shadow 0.2s ease;
@@ -227,22 +252,29 @@
         }
 
         .metric-label {
-            font-size: 0.72rem;
+            font-size: 0.6rem;
             font-weight: 800;
             text-transform: uppercase;
-            letter-spacing: 0.6px;
+            letter-spacing: 0.5px;
             color: #64748b;
         }
 
         .metric-value {
-            font-size: 1.6rem;
+            font-size: clamp(1.25rem, 3.5vw, 1.55rem);
             font-weight: 800;
-            margin-top: 0.35rem;
+            margin-top: 0.25rem;
             margin-bottom: 0.1rem;
             letter-spacing: -0.5px;
         }
 
-        /* Custom Tables */
+        /* Responsive Tables */
+        .table-responsive {
+            -webkit-overflow-scrolling: touch;
+            overflow-x: auto;
+            border-radius: var(--card-radius);
+            margin-bottom: 0;
+        }
+
         .table-custom thead th {
             background-color: #f8fafc;
             color: #475569;
@@ -251,14 +283,15 @@
             text-transform: uppercase;
             letter-spacing: 0.5px;
             border-bottom: 2px solid #e2e8f0;
-            padding: 0.85rem 1rem;
+            padding: 0.75rem 0.9rem;
+            white-space: nowrap;
         }
 
         .table-custom tbody td {
-            padding: 0.85rem 1rem;
+            padding: 0.75rem 0.9rem;
             vertical-align: middle;
             color: #334155;
-            font-size: 0.92rem;
+            font-size: 0.9rem;
             border-bottom: 1px solid #f1f5f9;
         }
 
@@ -266,26 +299,26 @@
             background-color: #fefce8;
         }
 
-        /* Stylish & Elegant Footer View */
+        /* Footer View */
         .app-footer {
             background: #ffffff;
             border-top: 3px solid;
             border-image: linear-gradient(90deg, #d97706 0%, #f59e0b 50%, #dc2626 100%) 1;
-            padding: 1.75rem 1.5rem 1.25rem 1.5rem;
+            padding: 1.5rem 1.25rem 1.25rem 1.25rem;
             margin-top: auto;
-            box-shadow: 0 -6px 20px rgba(0, 0, 0, 0.03);
+            box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.03);
         }
 
         .footer-brand {
             font-weight: 800;
             color: #92400e;
-            font-size: 1.05rem;
+            font-size: 1rem;
             letter-spacing: -0.2px;
         }
 
         .footer-sub {
             color: #64748b;
-            font-size: 0.85rem;
+            font-size: 0.82rem;
             font-weight: 500;
         }
 
@@ -295,31 +328,153 @@
             border: 1px solid #fde68a;
             font-size: 0.78rem;
             font-weight: 700;
-            padding: 0.4rem 0.85rem;
+            padding: 0.35rem 0.75rem;
             border-radius: 50rem;
         }
 
-        /* Mobile Responsive */
+        /* Card & Container Customization */
+        .card-custom {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: var(--card-radius);
+            box-shadow: var(--card-shadow);
+        }
+
+        /* Prevent background scroll when mobile sidebar is open */
+        body.sidebar-open {
+            overflow: hidden !important;
+        }
+
+        /* Responsive Mobile Utility Styles */
         @media (max-width: 991.98px) {
             .sidebar {
-                margin-left: calc(-1 * var(--sidebar-width));
+                transform: translateX(-100%);
             }
+
             .sidebar.show {
-                margin-left: 0;
-                box-shadow: 4px 0 25px rgba(0,0,0,0.12);
+                transform: translateX(0);
+                box-shadow: 8px 0 30px rgba(0,0,0,0.15);
             }
+
             .main-wrapper {
                 margin-left: 0;
+                width: 100%;
+            }
+
+            .main-topbar {
+                padding: 0.65rem 0.9rem;
+            }
+
+            .metric-card {
+                padding: 0.85rem;
+            }
+        }
+
+        @media (max-width: 767.98px) {
+            /* Touch-Friendly Sizes & Prevent Auto-Zoom on iOS/Android browsers */
+            .form-control, .form-select, .input-group-text, input[type="text"], input[type="number"], input[type="email"], input[type="password"], input[type="date"], select, textarea {
+                font-size: 16px !important;
+                min-height: 42px;
+            }
+
+            .btn {
+                min-height: 40px;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .btn-group-sm > .btn, .btn-sm {
+                min-height: 36px;
+                padding-left: 0.65rem;
+                padding-right: 0.65rem;
+                font-size: 0.84rem;
+            }
+
+            .main-topbar {
+                flex-wrap: nowrap;
+            }
+
+            .topbar-subtitle {
+                font-size: 0.75rem;
+            }
+
+            .app-footer {
+                padding: 1.25rem 1rem 1rem 1rem;
+            }
+
+            /* Responsive Pagination */
+            .pagination {
+                justify-content: center !important;
+                flex-wrap: wrap;
+                margin-bottom: 0;
+                gap: 2px;
+            }
+
+            .page-link {
+                padding: 0.35rem 0.65rem;
+                font-size: 0.82rem;
+            }
+        }
+
+        @media (max-width: 575.98px) {
+            main.p-3 {
+                padding: 0.75rem !important;
+            }
+
+            .topbar-subtitle {
+                display: none;
+            }
+
+            .metric-card {
+                padding: 0.75rem 0.6rem;
+            }
+
+            .metric-label {
+                font-size: 0.65rem;
+                letter-spacing: 0.3px;
+            }
+
+            .metric-value {
+                font-size: 1.15rem;
+            }
+
+            .card-custom {
+                border-radius: 12px;
+            }
+
+            .ui-card-header {
+                padding: 0.75rem 0.9rem;
+            }
+
+            /* Compact mobile padding for forms & detail cards */
+            .card-custom.p-4 {
+                padding: 1rem !important;
+            }
+
+            /* Mobile Tab Rows */
+            .mobile-flex-tabs {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 0.35rem;
+                width: 100%;
+            }
+
+            .mobile-flex-tabs .btn {
+                flex: 1 1 auto;
+                text-align: center;
+                justify-content: center;
             }
         }
 
         /* Print Styling */
         @media print {
-            .sidebar, .main-topbar, .no-print, .btn, .pagination, footer {
+            .sidebar, .main-topbar, .no-print, .btn, .pagination, footer, .sidebar-overlay {
                 display: none !important;
             }
             .main-wrapper {
                 margin-left: 0 !important;
+                width: 100% !important;
             }
             body {
                 background: #ffffff !important;
@@ -333,14 +488,20 @@
     <!-- Light Vertical Sidebar -->
     <aside class="sidebar no-print" id="sidebarNav">
         <!-- Sidebar Brand Header with Favicon SVG Logo -->
-        <div class="sidebar-brand">
-            <div class="sidebar-brand-title d-flex align-items-center">
-                <img src="{{ asset('favicon.svg') }}" width="32" height="32" alt="Ganesh Logo" class="me-2 flex-shrink-0">
-                <span>Ganesh Chaturthi 2026</span>
+        <div class="sidebar-brand d-flex align-items-center justify-content-between">
+            <div>
+                <div class="sidebar-brand-title d-flex align-items-center">
+                    <img src="{{ asset('favicon.svg') }}" width="30" height="30" alt="Ganesh Logo" class="me-2 flex-shrink-0">
+                    <span>Ganesh Chaturthi 2026</span>
+                </div>
+                <div class="sidebar-brand-sub mt-1 ms-1">
+                    Collection & Expense Tracker
+                </div>
             </div>
-            <div class="sidebar-brand-sub mt-1 ms-1">
-                Collection & Expense Tracker
-            </div>
+            <!-- Mobile Close Button -->
+            <button class="btn btn-sm btn-light border-0 text-secondary d-lg-none p-1 ms-2" id="sidebarCloseBtn" type="button" aria-label="Close Sidebar">
+                <i class="bi bi-x-lg fs-5"></i>
+            </button>
         </div>
 
         <!-- Sidebar Navigation Menu -->
@@ -390,35 +551,38 @@
         @endauth
     </aside>
 
+    <!-- Mobile Sidebar Backdrop Overlay -->
+    <div class="sidebar-overlay no-print" id="sidebarOverlay"></div>
+
     <!-- Main Content Wrapper -->
     <div class="main-wrapper">
         <!-- Main Light Topbar -->
         <header class="main-topbar no-print">
-            <div class="d-flex align-items-center gap-3">
-                <button class="btn btn-light d-lg-none border" type="button" onclick="document.getElementById('sidebarNav').classList.toggle('show')">
+            <div class="d-flex align-items-center gap-2 gap-sm-3">
+                <button class="btn btn-light d-lg-none border p-1.5 px-2" type="button" id="sidebarToggleBtn" aria-label="Toggle Menu">
                     <i class="bi bi-list fs-5"></i>
                 </button>
                 <div class="d-flex align-items-center">
                     <!-- Topbar Favicon SVG Logo Image -->
-                    <img src="{{ asset('favicon.svg') }}" width="36" height="36" alt="Ganesh Logo" class="me-2.5 flex-shrink-0">
+                    <img src="{{ asset('favicon.svg') }}" width="32" height="32" alt="Ganesh Logo" class="me-2 flex-shrink-0">
                     <div>
-                        <h1 class="topbar-title">Ganesh Chaturthi Celebration 2026</h1>
+                        <h1 class="topbar-title">Ganesh Chaturthi 2026</h1>
                         <div class="topbar-subtitle">Collection & Expense Tracker</div>
                     </div>
                 </div>
             </div>
 
-            <div class="d-flex align-items-center gap-2">
-                <!-- Date Badge -->
-                <span class="badge bg-light text-dark border px-3 py-2 fw-medium d-none d-sm-inline-block">
+            <div class="d-flex align-items-center gap-1.5 gap-sm-2">
+                <!-- Date Badge (Hidden on mobile phones) -->
+                <span class="badge bg-light text-dark border px-2.5 py-2 fw-medium d-none d-md-inline-block">
                     <i class="bi bi-calendar-event me-1 text-warning"></i> Updated: {{ now()->format('d M Y') }}
                 </span>
 
                 @auth
                 <!-- Quick Add Dropdown -->
                 <div class="dropdown">
-                    <button class="btn btn-warning text-dark fw-bold btn-sm dropdown-toggle px-3 py-2 shadow-sm" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="bi bi-plus-lg me-1"></i> Quick Add
+                    <button class="btn btn-warning text-dark fw-bold btn-sm dropdown-toggle px-2.5 px-sm-3 py-1.5 shadow-sm" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="bi bi-plus-lg me-1"></i> <span class="d-none d-sm-inline">Quick </span>Add
                     </button>
                     <ul class="dropdown-menu dropdown-menu-end shadow border-0">
                         <li><a class="dropdown-item py-2" href="{{ route('students.create') }}"><i class="bi bi-mortarboard me-2 text-primary"></i> Student Collection</a></li>
@@ -431,8 +595,8 @@
 
                 <!-- Admin Profile & Logout -->
                 <div class="dropdown ms-1">
-                    <button class="btn btn-light border btn-sm dropdown-toggle px-3 py-2 fw-bold text-dark shadow-sm" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="bi bi-person-circle me-1 text-warning fs-6"></i> {{ Auth::user()->name ?? 'Admin' }}
+                    <button class="btn btn-light border btn-sm dropdown-toggle px-2.5 px-sm-3 py-1.5 fw-bold text-dark shadow-sm" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="bi bi-person-circle me-1 text-warning fs-6"></i> <span class="d-none d-sm-inline">{{ Auth::user()->name ?? 'Admin' }}</span>
                     </button>
                     <ul class="dropdown-menu dropdown-menu-end shadow border-0">
                         <li><span class="dropdown-item-text text-muted small"><i class="bi bi-shield-check text-success me-1"></i> Super Admin</span></li>
@@ -449,13 +613,13 @@
                 </div>
                 @else
                 <!-- Admin Login Button for Guests -->
-                <a href="{{ route('login') }}" class="btn btn-warning text-dark fw-bold btn-sm px-3 py-2 shadow-sm">
+                <a href="{{ route('login') }}" class="btn btn-warning text-dark fw-bold btn-sm px-2.5 px-sm-3 py-1.5 shadow-sm">
                     <i class="bi bi-box-arrow-in-right me-1"></i> Admin Login
                 </a>
                 @endauth
 
-                <!-- Print Button -->
-                <button onclick="window.print()" class="btn btn-sm btn-outline-secondary fw-semibold">
+                <!-- Print Button (Hidden on phones) -->
+                <button onclick="window.print()" class="btn btn-sm btn-outline-secondary fw-semibold d-none d-sm-inline-flex align-items-center">
                     <i class="bi bi-printer me-1"></i> Print
                 </button>
             </div>
@@ -465,16 +629,16 @@
         <main class="flex-grow-1 p-3 p-md-4">
             <!-- Flash Notification Messages -->
             @if(session('success'))
-                <div class="alert alert-success alert-dismissible fade show border-0 shadow-sm rounded-3 mb-4 py-3" role="alert">
+                <div class="alert alert-success alert-dismissible fade show border-0 shadow-sm rounded-3 mb-3 mb-md-4 py-2.5 px-3" role="alert">
                     <i class="bi bi-check-circle-fill me-2 fs-5 align-middle"></i> {{ session('success') }}
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    <button type="button" class="btn-close py-2.5" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
             @endif
 
             @if(session('error'))
-                <div class="alert alert-danger alert-dismissible fade show border-0 shadow-sm rounded-3 mb-4 py-3" role="alert">
+                <div class="alert alert-danger alert-dismissible fade show border-0 shadow-sm rounded-3 mb-3 mb-md-4 py-2.5 px-3" role="alert">
                     <i class="bi bi-exclamation-triangle-fill me-2 fs-5 align-middle"></i> {{ session('error') }}
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    <button type="button" class="btn-close py-2.5" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
             @endif
 
@@ -483,12 +647,12 @@
 
         <!-- Stylish & Professional Footer View -->
         <footer class="app-footer no-print">
-            <div class="container-fluid">
+            <div class="container-fluid px-0">
                 <div class="row align-items-center gy-3">
-                    <div class="col-12 col-md-7">
-                        <div class="d-flex align-items-center">
+                    <div class="col-12 col-md-7 text-center text-md-start">
+                        <div class="d-inline-flex d-md-flex align-items-center text-start">
                             <!-- Footer Favicon SVG Logo Image -->
-                            <img src="{{ asset('favicon.svg') }}" width="36" height="36" alt="Ganesh Logo" class="me-3 flex-shrink-0">
+                            <img src="{{ asset('favicon.svg') }}" width="34" height="34" alt="Ganesh Logo" class="me-2.5 flex-shrink-0">
                             <div>
                                 <div class="footer-brand">Ganesh Chaturthi 2026</div>
                                 <div class="footer-sub">Collection & Expense Tracker • GEC Palanpur</div>
@@ -500,7 +664,7 @@
                 <div class="row align-items-center">
                     <div class="col-12 text-center">
                         <p class="mb-0 text-muted small fw-medium">
-                            <strong>Ganesh Chaturthi 2026</strong> | Government Engineering College, Palanpur
+                            <strong>Ganesh Chaturthi Celebration 2026</strong> | Government Engineering College, Palanpur
                         </p>
                     </div>
                 </div>
@@ -512,6 +676,52 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- Mobile Navigation JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const sidebar = document.getElementById('sidebarNav');
+            const overlay = document.getElementById('sidebarOverlay');
+            const toggleBtn = document.getElementById('sidebarToggleBtn');
+            const closeBtn = document.getElementById('sidebarCloseBtn');
+
+            function openSidebar() {
+                sidebar.classList.add('show');
+                overlay.classList.add('show');
+                document.body.classList.add('sidebar-open');
+            }
+
+            function closeSidebar() {
+                sidebar.classList.remove('show');
+                overlay.classList.remove('show');
+                document.body.classList.remove('sidebar-open');
+            }
+
+            if (toggleBtn) {
+                toggleBtn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    if (sidebar.classList.contains('show')) {
+                        closeSidebar();
+                    } else {
+                        openSidebar();
+                    }
+                });
+            }
+
+            if (closeBtn) closeBtn.addEventListener('click', closeSidebar);
+            if (overlay) overlay.addEventListener('click', closeSidebar);
+
+            // Close sidebar when clicking any navigation link on mobile
+            const navLinks = sidebar.querySelectorAll('.sidebar-link');
+            navLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    if (window.innerWidth < 992) {
+                        closeSidebar();
+                    }
+                });
+            });
+        });
+    </script>
 
     @stack('scripts')
 </body>

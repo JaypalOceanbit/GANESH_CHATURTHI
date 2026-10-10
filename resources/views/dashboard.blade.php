@@ -5,75 +5,75 @@
 @section('content')
 
 <!-- Page Title & Quick Action Buttons -->
-<div class="d-flex flex-column flex-md-row align-items-md-center justify-content-between mb-4">
+<div class="d-flex flex-column flex-md-row align-items-md-center justify-content-between mb-3 mb-md-4 gap-2">
     <div>
-        <h2 class="h4 fw-bold mb-1">Dashboard</h2>
+        <h2 class="h4 fw-bold mb-0">Dashboard</h2>
     </div>
     @auth
-    <div class="mt-3 mt-md-0 d-flex flex-wrap gap-2 no-print">
-        <a href="{{ route('students.create') }}" class="btn btn-sm btn-outline-primary fw-semibold">
+    <div class="d-flex flex-wrap gap-2 no-print">
+        <a href="{{ route('students.create') }}" class="btn btn-sm btn-outline-primary fw-semibold flex-grow-1 flex-sm-grow-0">
             <i class="bi bi-plus-lg me-1"></i> Student Collection
         </a>
-        <a href="{{ route('faculty.create') }}" class="btn btn-sm btn-outline-success fw-semibold">
+        <a href="{{ route('faculty.create') }}" class="btn btn-sm btn-outline-success fw-semibold flex-grow-1 flex-sm-grow-0">
             <i class="bi bi-plus-lg me-1"></i> Faculty Collection
         </a>
-        <a href="{{ route('sponsors.create') }}" class="btn btn-sm btn-outline-warning text-dark fw-semibold">
+        <a href="{{ route('sponsors.create') }}" class="btn btn-sm btn-outline-warning text-dark fw-semibold flex-grow-1 flex-sm-grow-0">
             <i class="bi bi-plus-lg me-1"></i> Sponsor Item
         </a>
-        <a href="{{ route('expenses.create') }}" class="btn btn-sm btn-danger fw-semibold">
+        <a href="{{ route('expenses.create') }}" class="btn btn-sm btn-danger fw-semibold flex-grow-1 flex-sm-grow-0">
             <i class="bi bi-plus-lg me-1"></i> Expense Record
         </a>
     </div>
     @endauth
 </div>
 
-<!-- 6 Summary Metric Cards -->
-<div class="row g-3 mb-4">
+<!-- 6 Summary Metric Cards (2 per row on mobile phones) -->
+<div class="row g-2 g-sm-3 mb-4">
     <!-- Card 1: Student Collection -->
-    <div class="col-12 col-sm-6 col-xl-2">
+    <div class="col-6 col-sm-6 col-md-4 col-xl-2">
         <div class="metric-card border-start border-4 border-primary">
-            <div class="metric-label">Student Collection</div>
-            <div class="metric-value text-primary">₹{{ number_format($studentTotal, 0) }}</div>
+            <div class="metric-label text-truncate">Student Collection</div>
+            <div class="metric-value text-primary text-truncate">₹{{ number_format($studentTotal, 0) }}</div>
         </div>
     </div>
 
     <!-- Card 2: Faculty Collection -->
-    <div class="col-12 col-sm-6 col-xl-2">
+    <div class="col-6 col-sm-6 col-md-4 col-xl-2">
         <div class="metric-card border-start border-4 border-success">
-            <div class="metric-label">Faculty Collection</div>
-            <div class="metric-value text-success">₹{{ number_format($facultyTotal, 0) }}</div>
+            <div class="metric-label text-truncate">Faculty Collection</div>
+            <div class="metric-value text-success text-truncate">₹{{ number_format($facultyTotal, 0) }}</div>
         </div>
     </div>
 
     <!-- Card 3: Total Collection -->
-    <div class="col-12 col-sm-6 col-xl-2">
+    <div class="col-6 col-sm-6 col-md-4 col-xl-2">
         <div class="metric-card border-start border-4 border-warning">
-            <div class="metric-label">Total Collection</div>
-            <div class="metric-value text-dark">₹{{ number_format($totalCollection, 0) }}</div>
+            <div class="metric-label text-truncate">Total Collection</div>
+            <div class="metric-value text-dark text-truncate">₹{{ number_format($totalCollection, 0) }}</div>
         </div>
     </div>
 
     <!-- Card 4: Sponsors Count -->
-    <div class="col-12 col-sm-6 col-xl-2">
+    <div class="col-6 col-sm-6 col-md-4 col-xl-2">
         <div class="metric-card border-start border-4 border-info">
-            <div class="metric-label">Total Sponsors</div>
-            <div class="metric-value text-info">{{ $sponsorCount }}</div>
+            <div class="metric-label text-truncate">Total Sponsors</div>
+            <div class="metric-value text-info text-truncate">{{ $sponsorCount }}</div>
         </div>
     </div>
 
     <!-- Card 5: Total Expenses -->
-    <div class="col-12 col-sm-6 col-xl-2">
+    <div class="col-6 col-sm-6 col-md-4 col-xl-2">
         <div class="metric-card border-start border-4 border-danger">
-            <div class="metric-label">Total Expenses</div>
-            <div class="metric-value text-danger">₹{{ number_format($totalExpenses, 0) }}</div>
+            <div class="metric-label text-truncate">Total Expenses</div>
+            <div class="metric-value text-danger text-truncate">₹{{ number_format($totalExpenses, 0) }}</div>
         </div>
     </div>
 
     <!-- Card 6: Current Balance -->
-    <div class="col-12 col-sm-6 col-xl-2">
+    <div class="col-6 col-sm-6 col-md-4 col-xl-2">
         <div class="metric-card border-start border-4 {{ $balance >= 0 ? 'border-success' : 'border-danger' }}">
-            <div class="metric-label">Current Balance</div>
-            <div class="metric-value {{ $balance >= 0 ? 'text-success' : 'text-danger' }}">
+            <div class="metric-label text-truncate">Current Balance</div>
+            <div class="metric-value {{ $balance >= 0 ? 'text-success' : 'text-danger' }} text-truncate">
                 ₹{{ number_format($balance, 0) }}
             </div>
         </div>

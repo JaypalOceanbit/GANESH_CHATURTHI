@@ -5,13 +5,13 @@
 @section('content')
 
 <!-- Header & Actions -->
-<div class="d-flex flex-column flex-md-row align-items-md-center justify-content-between mb-4">
+<div class="d-flex flex-column flex-sm-row align-items-sm-center justify-content-between mb-3 mb-sm-4 gap-2">
     <div>
-        <h2 class="h3 fw-bold mb-1"><i class="bi bi-tags-fill text-warning me-2"></i> Expense Categories</h2>
+        <h2 class="h3 fw-bold mb-0"><i class="bi bi-tags-fill text-warning me-2"></i> Expense Categories</h2>
     </div>
     @auth
-    <div class="mt-3 mt-md-0 d-flex gap-2 no-print">
-        <a href="{{ route('expense-categories.create') }}" class="btn btn-warning text-dark btn-sm fw-bold">
+    <div class="d-flex flex-wrap gap-2 no-print">
+        <a href="{{ route('expense-categories.create') }}" class="btn btn-warning text-dark btn-sm fw-bold flex-grow-1 flex-sm-grow-0">
             <i class="bi bi-plus-lg me-1"></i> Add Category
         </a>
     </div>
@@ -24,14 +24,14 @@
         <table class="table table-custom table-hover align-middle mb-0">
             <thead>
                 <tr>
-                    <th style="width: 60px;">SR</th>
+                    <th style="width: 50px;">SR</th>
                     <th>CATEGORY NAME</th>
                     <th>DESCRIPTION</th>
-                    <th class="text-center">LINKED EXPENSES</th>
-                    <th class="text-end">TOTAL SPENT (₹)</th>
+                    <th class="text-center">ITEMS</th>
+                    <th class="text-end">SPENT (₹)</th>
                     <th class="text-center">STATUS</th>
                     @auth
-                    <th class="text-center no-print" style="width: 140px;">ACTION</th>
+                    <th class="text-center no-print" style="width: 130px;">ACTION</th>
                     @endauth
                 </tr>
             </thead>
@@ -39,12 +39,12 @@
                 @forelse($categories as $category)
                     <tr>
                         <td class="fw-bold text-muted">{{ $loop->iteration }}</td>
-                        <td class="fw-bold text-dark fs-6">
+                        <td class="fw-bold text-dark fs-6 text-nowrap">
                             <i class="bi bi-tag me-1 text-warning"></i> {{ $category->name }}
                         </td>
                         <td class="text-muted small">{{ $category->description ?: '—' }}</td>
                         <td class="text-center">
-                            <span class="badge bg-secondary rounded-pill px-3 py-1 fs-6">
+                            <span class="badge bg-secondary rounded-pill px-2.5 py-1">
                                 {{ $category->expenses_count }}
                             </span>
                         </td>
@@ -61,19 +61,19 @@
                         @auth
                         <td class="text-center no-print">
                             <div class="btn-group btn-group-sm" role="group">
-                                <a href="{{ route('expense-categories.edit', $category) }}" class="btn btn-light border text-primary" title="Edit">
+                                <a href="{{ route('expense-categories.edit', $category) }}" class="btn btn-light border text-primary px-2 py-1" title="Edit">
                                     <i class="bi bi-pencil"></i>
                                 </a>
                                 @if($category->expenses_count == 0)
                                     <form action="{{ route('expense-categories.destroy', $category) }}" method="POST" class="d-inline" onsubmit="return confirm('Are you sure you want to delete this category?');">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="btn btn-light border text-danger" title="Delete">
+                                        <button type="submit" class="btn btn-light border text-danger px-2 py-1" title="Delete">
                                             <i class="bi bi-trash"></i>
                                         </button>
                                     </form>
                                 @else
-                                    <button class="btn btn-light border text-muted" title="Cannot delete category with active expenses" disabled>
+                                    <button class="btn btn-light border text-muted px-2 py-1" title="Cannot delete category with active expenses" disabled>
                                         <i class="bi bi-lock"></i>
                                     </button>
                                 @endif

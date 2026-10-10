@@ -68,9 +68,9 @@
                 </div>
 
                 <!-- Action Buttons -->
-                <div class="d-flex justify-content-end gap-2">
-                    <a href="{{ route('faculty.index') }}" class="btn btn-light border px-4">Cancel</a>
-                    <button type="submit" class="btn btn-success px-4 fw-bold">
+                <div class="d-flex flex-column-reverse flex-sm-row justify-content-end gap-2 mt-4">
+                    <a href="{{ route('faculty.index') }}" class="btn btn-light border px-4 w-100 w-sm-auto">Cancel</a>
+                    <button type="submit" class="btn btn-success px-4 fw-bold w-100 w-sm-auto">
                         <i class="bi bi-check-circle me-1"></i> Save Faculty Record
                     </button>
                 </div>
