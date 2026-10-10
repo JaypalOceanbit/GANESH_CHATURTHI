@@ -13,9 +13,11 @@
         <a href="{{ route('faculty.export') }}" class="btn btn-outline-secondary btn-sm fw-medium">
             <i class="bi bi-file-earmark-spreadsheet me-1"></i> Export CSV
         </a>
+        @auth
         <a href="{{ route('faculty.create') }}" class="btn btn-success btn-sm fw-bold">
             <i class="bi bi-plus-lg me-1"></i> Add Faculty Collection
         </a>
+        @endauth
     </div>
 </div>
 
@@ -48,7 +50,9 @@
                     <th class="text-end" style="width: 140px;">AMOUNT (₹)</th>
                     <th>SPONSOR / PURPOSE</th>
                     <th style="width: 140px;">DATE</th>
+                    @auth
                     <th class="text-center no-print" style="width: 150px;">ACTION</th>
+                    @endauth
                 </tr>
             </thead>
             <tbody>
@@ -69,6 +73,7 @@
                         <td class="text-muted small">
                             {{ $faculty->collection_date ? $faculty->collection_date->format('d/m/Y') : 'N/A' }}
                         </td>
+                        @auth
                         <td class="text-center no-print">
                             <div class="btn-group btn-group-sm" role="group">
                                 <a href="{{ route('faculty.show', $faculty) }}" class="btn btn-light border text-info" title="View Details">
@@ -86,10 +91,11 @@
                                 </form>
                             </div>
                         </td>
+                        @endauth
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="6" class="text-center py-5 text-muted">
+                        <td colspan="{{ auth()->check() ? 6 : 5 }}" class="text-center py-5 text-muted">
                             <i class="bi bi-inbox fs-1 d-block mb-2 text-secondary"></i>
                             No faculty collection records found.
                         </td>

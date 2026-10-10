@@ -13,9 +13,11 @@
         <a href="{{ route('expenses.export', request()->all()) }}" class="btn btn-outline-secondary btn-sm fw-medium">
             <i class="bi bi-file-earmark-spreadsheet me-1"></i> Export CSV
         </a>
+        @auth
         <a href="{{ route('expenses.create') }}" class="btn btn-danger btn-sm fw-bold">
             <i class="bi bi-plus-lg me-1"></i> Add Expense
         </a>
+        @endauth
     </div>
 </div>
 
@@ -112,7 +114,9 @@
                     <th style="width: 150px;">CATEGORY</th>
                     <th class="text-end" style="width: 130px;">PRICE (₹)</th>
                     <th class="text-center" style="width: 110px;">BILL PHOTO</th>
+                    @auth
                     <th class="text-center no-print" style="width: 130px;">ACTION</th>
+                    @endauth
                 </tr>
             </thead>
             <tbody>
@@ -136,6 +140,7 @@
                                 <span class="text-muted small">—</span>
                             @endif
                         </td>
+                        @auth
                         <td class="text-center no-print">
                             <div class="btn-group btn-group-sm" role="group">
                                 <a href="{{ route('expenses.show', $expense) }}" class="btn btn-light border text-info" title="View Details">
@@ -153,10 +158,11 @@
                                 </form>
                             </div>
                         </td>
+                        @endauth
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="7" class="text-center py-5 text-muted">
+                        <td colspan="{{ auth()->check() ? 7 : 6 }}" class="text-center py-5 text-muted">
                             <i class="bi bi-inbox fs-1 d-block mb-2 text-secondary"></i>
                             No expenses found for the selected filters.
                         </td>

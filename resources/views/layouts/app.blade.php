@@ -346,12 +346,14 @@
             </a>
         </nav>
 
+        @auth
         <!-- Sidebar Bottom Action -->
         <div class="p-3 border-top bg-light">
             <a href="{{ route('expenses.create') }}" class="btn btn-warning w-100 fw-bold text-dark btn-sm py-2">
                 <i class="bi bi-plus-circle-fill me-1"></i> Add Expense
             </a>
         </div>
+        @endauth
     </aside>
 
     <!-- Main Content Wrapper -->
@@ -388,6 +390,7 @@
                     <i class="bi bi-calendar-event me-1 text-warning"></i> Updated: {{ now()->format('d M Y') }}
                 </span>
 
+                @auth
                 <!-- Quick Add Dropdown -->
                 <div class="dropdown">
                     <button class="btn btn-warning text-dark fw-bold btn-sm dropdown-toggle px-3 py-2" type="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -401,6 +404,31 @@
                         <li><a class="dropdown-item py-2" href="{{ route('expenses.create') }}"><i class="bi bi-receipt me-2 text-danger"></i> Celebration Expense</a></li>
                     </ul>
                 </div>
+
+                <!-- Admin Profile & Logout -->
+                <div class="dropdown ms-1">
+                    <button class="btn btn-light border btn-sm dropdown-toggle px-3 py-2 fw-bold text-dark" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="bi bi-person-circle me-1 text-warning fs-6"></i> {{ Auth::user()->name ?? 'Admin' }}
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end shadow-sm border-0">
+                        <li><span class="dropdown-item-text text-muted small"><i class="bi bi-shield-check text-success me-1"></i> Super Admin</span></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li>
+                            <form action="{{ route('logout') }}" method="POST">
+                                @csrf
+                                <button type="submit" class="dropdown-item text-danger fw-semibold py-2">
+                                    <i class="bi bi-box-arrow-right me-2"></i> Log Out
+                                </button>
+                            </form>
+                        </li>
+                    </ul>
+                </div>
+                @else
+                <!-- Admin Login Button for Guests -->
+                <a href="{{ route('login') }}" class="btn btn-warning text-dark fw-bold btn-sm px-3 py-2">
+                    <i class="bi bi-box-arrow-in-right me-1"></i> Admin Login
+                </a>
+                @endauth
 
                 <!-- Print Button -->
                 <button onclick="window.print()" class="btn btn-sm btn-outline-secondary fw-semibold">

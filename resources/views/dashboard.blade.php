@@ -10,6 +10,7 @@
         <h2 class="h4 fw-bold mb-1">Celebration Dashboard</h2>
         <p class="text-muted mb-0 small">Real-time summary of student/faculty fund collections, sponsors, and celebration expenses.</p>
     </div>
+    @auth
     <div class="mt-3 mt-md-0 d-flex flex-wrap gap-2 no-print">
         <a href="{{ route('students.create') }}" class="btn btn-sm btn-outline-primary fw-semibold">
             <i class="bi bi-plus-lg me-1"></i> Student Collection
@@ -24,6 +25,7 @@
             <i class="bi bi-plus-lg me-1"></i> Expense Record
         </a>
     </div>
+    @endauth
 </div>
 
 <!-- 6 Summary Metric Cards -->

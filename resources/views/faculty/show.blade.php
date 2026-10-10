@@ -41,6 +41,7 @@
                 </div>
             </div>
 
+            @auth
             <div class="d-flex justify-content-between align-items-center">
                 <form action="{{ route('faculty.destroy', $faculty) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this faculty collection record?');">
                     @csrf
@@ -55,6 +56,7 @@
                     </a>
                 </div>
             </div>
+            @endauth
         </div>
     </div>
 </div>

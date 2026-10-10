@@ -39,6 +39,7 @@
                 </div>
             </div>
 
+            @auth
             <div class="d-flex justify-content-between align-items-center">
                 <form action="{{ route('sponsors.destroy', $sponsor) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this sponsor record?');">
                     @csrf
@@ -53,6 +54,7 @@
                     </a>
                 </div>
             </div>
+            @endauth
         </div>
     </div>
 </div>

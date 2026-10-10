@@ -9,11 +9,13 @@
     <div>
         <h2 class="h3 fw-bold mb-1"><i class="bi bi-gift-fill text-warning me-2"></i> Sponsors & Contributions</h2>
     </div>
+    @auth
     <div class="mt-3 mt-md-0 d-flex gap-2 no-print">
         <a href="{{ route('sponsors.create') }}" class="btn btn-warning text-dark btn-sm fw-bold">
             <i class="bi bi-plus-lg me-1"></i> Add Sponsor Contribution
         </a>
     </div>
+    @endauth
 </div>
 
 <!-- Search Card -->
@@ -45,7 +47,9 @@
                     <th>SPONSOR ITEM / CONTRIBUTION</th>
                     <th style="width: 140px;">DATE</th>
                     <th>NOTES</th>
+                    @auth
                     <th class="text-center no-print" style="width: 150px;">ACTION</th>
+                    @endauth
                 </tr>
             </thead>
             <tbody>
@@ -62,6 +66,7 @@
                             {{ $sponsor->sponsor_date ? $sponsor->sponsor_date->format('d/m/Y') : 'N/A' }}
                         </td>
                         <td class="text-muted small">{{ $sponsor->notes ?: '—' }}</td>
+                        @auth
                         <td class="text-center no-print">
                             <div class="btn-group btn-group-sm" role="group">
                                 <a href="{{ route('sponsors.show', $sponsor) }}" class="btn btn-light border text-info" title="View Details">
@@ -79,10 +84,11 @@
                                 </form>
                             </div>
                         </td>
+                        @endauth
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="6" class="text-center py-5 text-muted">
+                        <td colspan="{{ auth()->check() ? 6 : 5 }}" class="text-center py-5 text-muted">
                             <i class="bi bi-inbox fs-1 d-block mb-2 text-secondary"></i>
                             No sponsor contribution records found.
                         </td>

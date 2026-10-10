@@ -9,11 +9,13 @@
     <div>
         <h2 class="h3 fw-bold mb-1"><i class="bi bi-tags-fill text-warning me-2"></i> Expense Categories</h2>
     </div>
+    @auth
     <div class="mt-3 mt-md-0 d-flex gap-2 no-print">
         <a href="{{ route('expense-categories.create') }}" class="btn btn-warning text-dark btn-sm fw-bold">
             <i class="bi bi-plus-lg me-1"></i> Add Category
         </a>
     </div>
+    @endauth
 </div>
 
 <!-- Category Table -->
@@ -28,7 +30,9 @@
                     <th class="text-center">LINKED EXPENSES</th>
                     <th class="text-end">TOTAL SPENT (₹)</th>
                     <th class="text-center">STATUS</th>
+                    @auth
                     <th class="text-center no-print" style="width: 140px;">ACTION</th>
+                    @endauth
                 </tr>
             </thead>
             <tbody>
@@ -54,6 +58,7 @@
                                 <span class="badge bg-secondary-subtle text-secondary border px-2 py-1">Inactive</span>
                             @endif
                         </td>
+                        @auth
                         <td class="text-center no-print">
                             <div class="btn-group btn-group-sm" role="group">
                                 <a href="{{ route('expense-categories.edit', $category) }}" class="btn btn-light border text-primary" title="Edit">
@@ -74,10 +79,11 @@
                                 @endif
                             </div>
                         </td>
+                        @endauth
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="7" class="text-center py-5 text-muted">
+                        <td colspan="{{ auth()->check() ? 7 : 6 }}" class="text-center py-5 text-muted">
                             No expense categories found.
                         </td>
                     </tr>
