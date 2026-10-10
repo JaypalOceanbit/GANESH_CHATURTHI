@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Super Admin</title>
 
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="{{ asset('favicon.svg') }}">
+
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -106,20 +109,9 @@
         <!-- Brand Header -->
         <div class="login-header">
             <div class="icon-circle">
-                <svg width="44" height="44" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M32 4L38 16H26L32 4Z" fill="#d97706" />
-                  <path d="M32 10L42 22H22L32 10Z" fill="#f59e0b" />
-                  <circle cx="32" cy="12" r="2.5" fill="#dc2626" />
-                  <path d="M16 28C10 24 6 30 12 36C18 42 24 38 24 32Z" fill="#f59e0b" opacity="0.9"/>
-                  <path d="M48 28C54 24 58 30 52 36C46 42 40 38 40 32Z" fill="#f59e0b" opacity="0.9"/>
-                  <circle cx="32" cy="30" r="10" fill="#fbbf24"/>
-                  <path d="M32 22V28M29 24H35" stroke="#dc2626" stroke-width="2.5" stroke-linecap="round"/>
-                  <circle cx="32" cy="27" r="1.5" fill="#dc2626"/>
-                  <path d="M32 34C32 42 38 46 42 44C44.5 42.5 44 39 41 39C38 39 36 36 36 34" stroke="#d97706" stroke-width="4" stroke-linecap="round" fill="none"/>
-                  <circle cx="43" cy="42" r="3" fill="#dc2626"/>
-                </svg>
+                <img src="{{ asset('favicon.svg') }}" width="50" height="50" alt="Ganesh Logo">
             </div>
-            <h3 class="fw-bold text-dark mb-1">Super Admin</h3>
+            <h3 class="fw-bold text-dark mb-1">Super Admin Login</h3>
         </div>
 
         <!-- Login Form Body -->

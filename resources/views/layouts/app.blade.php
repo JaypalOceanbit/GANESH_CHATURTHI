@@ -4,7 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>@yield('title', 'Ganesh Chaturthi Celebration 2026') — Hostel Collection & Expense Tracker</title>
+    <title>@yield('title', 'Ganesh Chaturthi Celebration 2026') — Collection & Expense Tracker</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="{{ asset('favicon.svg') }}">
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -16,16 +19,18 @@
     <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
-    <!-- Bright & Light Custom Theme Styling -->
+    <!-- Premium Custom Styling -->
     <style>
         :root {
             --sidebar-width: 260px;
             --bg-body: #f8fafc;
             --sidebar-bg: #ffffff;
-            --card-radius: 12px;
-            --card-shadow: 0 1px 3px rgba(0, 0, 0, 0.05), 0 1px 2px rgba(0, 0, 0, 0.03);
+            --card-radius: 14px;
+            --card-shadow: 0 4px 15px rgba(0, 0, 0, 0.03), 0 1px 3px rgba(0, 0, 0, 0.04);
             --amber-primary: #d97706;
-            --amber-light: #fef3c7;
+            --amber-hover: #b45309;
+            --amber-light: #fffbeb;
+            --amber-badge: #fef3c7;
         }
 
         body {
@@ -33,10 +38,28 @@
             background-color: var(--bg-body);
             color: #1e293b;
             min-height: 100vh;
+            display: flex;
+            flex-direction: column;
         }
 
         h1, h2, h3, h4, h5, h6, .brand-font {
             font-family: 'Outfit', sans-serif;
+        }
+
+        /* Scrollbar Polish */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
         }
 
         /* Light & Bright Sidebar */
@@ -58,20 +81,22 @@
         .sidebar-brand {
             padding: 1.25rem 1.25rem;
             border-bottom: 1px solid #f1f5f9;
-            background: #fffbeb;
+            background: linear-gradient(180deg, #fffbeb 0%, #ffffff 100%);
         }
 
         .sidebar-brand-title {
             font-size: 1.05rem;
             font-weight: 800;
             color: #92400e;
-            line-height: 1.2;
+            line-height: 1.25;
+            letter-spacing: -0.2px;
         }
 
         .sidebar-brand-sub {
             font-size: 0.75rem;
             color: #78350f;
             font-weight: 600;
+            opacity: 0.85;
         }
 
         .sidebar-nav {
@@ -81,49 +106,51 @@
         }
 
         .sidebar-heading {
-            font-size: 0.7rem;
+            font-size: 0.68rem;
             text-transform: uppercase;
             letter-spacing: 0.8px;
             color: #94a3b8;
-            font-weight: 700;
-            padding: 0.6rem 0.75rem 0.3rem 0.75rem;
+            font-weight: 800;
+            padding: 0.75rem 0.75rem 0.35rem 0.75rem;
         }
 
         .sidebar-link {
             display: flex;
             align-items: center;
-            padding: 0.65rem 0.85rem;
+            padding: 0.68rem 0.85rem;
             color: #475569;
             text-decoration: none;
             font-weight: 600;
             font-size: 0.92rem;
-            border-radius: 8px;
-            margin-bottom: 3px;
-            transition: all 0.15s ease;
+            border-radius: 10px;
+            margin-bottom: 4px;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .sidebar-link i {
-            font-size: 1.1rem;
+            font-size: 1.15rem;
             margin-right: 0.75rem;
             width: 22px;
             text-align: center;
             color: #64748b;
+            transition: color 0.2s ease;
         }
 
         .sidebar-link:hover {
             color: #b45309;
             background: #fffbeb;
+            transform: translateX(3px);
         }
 
         .sidebar-link:hover i {
-            color: #b45309;
+            color: #d97706;
         }
 
         .sidebar-link.active {
             color: #92400e;
             background: #fef3c7;
             font-weight: 700;
-            border-left: 4px solid #d97706;
+            box-shadow: inset 4px 0 0 #d97706;
         }
 
         .sidebar-link.active i {
@@ -143,33 +170,37 @@
         .main-topbar {
             background: #ffffff;
             border-bottom: 1px solid #e2e8f0;
-            padding: 0.9rem 1.5rem;
+            padding: 0.85rem 1.5rem;
             display: flex;
             align-items: center;
             justify-content: space-between;
             position: sticky;
             top: 0;
             z-index: 990;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.02);
         }
 
         .topbar-title {
             font-weight: 800;
-            font-size: 1.2rem;
+            font-size: 1.25rem;
             color: #0f172a;
             margin: 0;
+            letter-spacing: -0.3px;
         }
 
         .topbar-subtitle {
             font-size: 0.82rem;
             color: #64748b;
+            font-weight: 500;
         }
 
-        /* Cards & Metric Cards */
+        /* UI Cards & Metric Cards */
         .ui-card {
             background: #ffffff;
             border: 1px solid #e2e8f0;
             border-radius: var(--card-radius);
             box-shadow: var(--card-shadow);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
         }
 
         .ui-card-header {
@@ -184,32 +215,35 @@
             background: #ffffff;
             border: 1px solid #e2e8f0;
             border-radius: var(--card-radius);
-            padding: 1.15rem;
+            padding: 1.25rem;
             box-shadow: var(--card-shadow);
             height: 100%;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .metric-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.06);
         }
 
         .metric-label {
-            font-size: 0.75rem;
-            font-weight: 700;
+            font-size: 0.72rem;
+            font-weight: 800;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
+            letter-spacing: 0.6px;
             color: #64748b;
         }
 
         .metric-value {
-            font-size: 1.55rem;
+            font-size: 1.6rem;
             font-weight: 800;
-            margin-top: 0.3rem;
+            margin-top: 0.35rem;
             margin-bottom: 0.1rem;
+            letter-spacing: -0.5px;
         }
 
-        /* Clean Table & Pagination */
-        .ui-table {
-            margin-bottom: 0;
-        }
-
-        .ui-table thead th {
+        /* Custom Tables */
+        .table-custom thead th {
             background-color: #f8fafc;
             color: #475569;
             font-weight: 700;
@@ -220,7 +254,7 @@
             padding: 0.85rem 1rem;
         }
 
-        .ui-table tbody td {
+        .table-custom tbody td {
             padding: 0.85rem 1rem;
             vertical-align: middle;
             color: #334155;
@@ -228,30 +262,41 @@
             border-bottom: 1px solid #f1f5f9;
         }
 
-        .ui-table tbody tr:hover {
-            background-color: #f8fafc;
+        .table-custom tbody tr:hover {
+            background-color: #fefce8;
         }
 
-        .pagination {
-            margin-bottom: 0;
+        /* Stylish & Elegant Footer View */
+        .app-footer {
+            background: #ffffff;
+            border-top: 3px solid;
+            border-image: linear-gradient(90deg, #d97706 0%, #f59e0b 50%, #dc2626 100%) 1;
+            padding: 1.75rem 1.5rem 1.25rem 1.5rem;
+            margin-top: auto;
+            box-shadow: 0 -6px 20px rgba(0, 0, 0, 0.03);
         }
-        .pagination .page-link {
-            color: #475569;
-            border-color: #e2e8f0;
-            padding: 0.35rem 0.75rem;
+
+        .footer-brand {
+            font-weight: 800;
+            color: #92400e;
+            font-size: 1.05rem;
+            letter-spacing: -0.2px;
+        }
+
+        .footer-sub {
+            color: #64748b;
             font-size: 0.85rem;
-            font-weight: 600;
-            border-radius: 6px;
-            margin: 0 2px;
+            font-weight: 500;
         }
-        .pagination .page-item.active .page-link {
-            background-color: #d97706;
-            border-color: #d97706;
-            color: #ffffff;
-        }
-        .pagination .page-link:hover {
-            background-color: #fef3c7;
+
+        .footer-badge {
+            background: #fffbeb;
             color: #b45309;
+            border: 1px solid #fde68a;
+            font-size: 0.78rem;
+            font-weight: 700;
+            padding: 0.4rem 0.85rem;
+            border-radius: 50rem;
         }
 
         /* Mobile Responsive */
@@ -261,7 +306,7 @@
             }
             .sidebar.show {
                 margin-left: 0;
-                box-shadow: 4px 0 20px rgba(0,0,0,0.1);
+                box-shadow: 4px 0 25px rgba(0,0,0,0.12);
             }
             .main-wrapper {
                 margin-left: 0;
@@ -287,25 +332,14 @@
 
     <!-- Light Vertical Sidebar -->
     <aside class="sidebar no-print" id="sidebarNav">
-        <!-- Sidebar Brand Header with Ganesha SVG Icon -->
+        <!-- Sidebar Brand Header with Favicon SVG Logo -->
         <div class="sidebar-brand">
             <div class="sidebar-brand-title d-flex align-items-center">
-                <svg width="28" height="28" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" class="me-2 align-middle">
-                  <path d="M32 4L38 16H26L32 4Z" fill="#d97706" />
-                  <path d="M32 10L42 22H22L32 10Z" fill="#f59e0b" />
-                  <circle cx="32" cy="12" r="2.5" fill="#dc2626" />
-                  <path d="M16 28C10 24 6 30 12 36C18 42 24 38 24 32Z" fill="#f59e0b" opacity="0.9"/>
-                  <path d="M48 28C54 24 58 30 52 36C46 42 40 38 40 32Z" fill="#f59e0b" opacity="0.9"/>
-                  <circle cx="32" cy="30" r="10" fill="#fbbf24"/>
-                  <path d="M32 22V28M29 24H35" stroke="#dc2626" stroke-width="2.5" stroke-linecap="round"/>
-                  <circle cx="32" cy="27" r="1.5" fill="#dc2626"/>
-                  <path d="M32 34C32 42 38 46 42 44C44.5 42.5 44 39 41 39C38 39 36 36 36 34" stroke="#d97706" stroke-width="4" stroke-linecap="round" fill="none"/>
-                  <circle cx="43" cy="42" r="3" fill="#dc2626"/>
-                </svg>
-                Ganesh Chaturthi 2026
+                <img src="{{ asset('favicon.svg') }}" width="32" height="32" alt="Ganesh Logo" class="me-2 flex-shrink-0">
+                <span>Ganesh Chaturthi 2026</span>
             </div>
-            <div class="sidebar-brand-sub mt-1">
-                Hostel Collection & Expense Tracker
+            <div class="sidebar-brand-sub mt-1 ms-1">
+                Collection & Expense Tracker
             </div>
         </div>
 
@@ -349,7 +383,7 @@
         @auth
         <!-- Sidebar Bottom Action -->
         <div class="p-3 border-top bg-light">
-            <a href="{{ route('expenses.create') }}" class="btn btn-warning w-100 fw-bold text-dark btn-sm py-2">
+            <a href="{{ route('expenses.create') }}" class="btn btn-warning w-100 fw-bold text-dark btn-sm py-2 shadow-sm">
                 <i class="bi bi-plus-circle-fill me-1"></i> Add Expense
             </a>
         </div>
@@ -365,21 +399,11 @@
                     <i class="bi bi-list fs-5"></i>
                 </button>
                 <div class="d-flex align-items-center">
-                    <svg width="24" height="24" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" class="me-2">
-                      <path d="M32 4L38 16H26L32 4Z" fill="#d97706" />
-                      <path d="M32 10L42 22H22L32 10Z" fill="#f59e0b" />
-                      <circle cx="32" cy="12" r="2.5" fill="#dc2626" />
-                      <path d="M16 28C10 24 6 30 12 36C18 42 24 38 24 32Z" fill="#f59e0b" opacity="0.9"/>
-                      <path d="M48 28C54 24 58 30 52 36C46 42 40 38 40 32Z" fill="#f59e0b" opacity="0.9"/>
-                      <circle cx="32" cy="30" r="10" fill="#fbbf24"/>
-                      <path d="M32 22V28M29 24H35" stroke="#dc2626" stroke-width="2.5" stroke-linecap="round"/>
-                      <circle cx="32" cy="27" r="1.5" fill="#dc2626"/>
-                      <path d="M32 34C32 42 38 46 42 44C44.5 42.5 44 39 41 39C38 39 36 36 36 34" stroke="#d97706" stroke-width="4" stroke-linecap="round" fill="none"/>
-                      <circle cx="43" cy="42" r="3" fill="#dc2626"/>
-                    </svg>
+                    <!-- Topbar Favicon SVG Logo Image -->
+                    <img src="{{ asset('favicon.svg') }}" width="36" height="36" alt="Ganesh Logo" class="me-2.5 flex-shrink-0">
                     <div>
                         <h1 class="topbar-title">Ganesh Chaturthi Celebration 2026</h1>
-                        <div class="topbar-subtitle">Hostel Collection & Expense Tracker</div>
+                        <div class="topbar-subtitle">Collection & Expense Tracker</div>
                     </div>
                 </div>
             </div>
@@ -393,10 +417,10 @@
                 @auth
                 <!-- Quick Add Dropdown -->
                 <div class="dropdown">
-                    <button class="btn btn-warning text-dark fw-bold btn-sm dropdown-toggle px-3 py-2" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <button class="btn btn-warning text-dark fw-bold btn-sm dropdown-toggle px-3 py-2 shadow-sm" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                         <i class="bi bi-plus-lg me-1"></i> Quick Add
                     </button>
-                    <ul class="dropdown-menu dropdown-menu-end shadow-sm border-0">
+                    <ul class="dropdown-menu dropdown-menu-end shadow border-0">
                         <li><a class="dropdown-item py-2" href="{{ route('students.create') }}"><i class="bi bi-mortarboard me-2 text-primary"></i> Student Collection</a></li>
                         <li><a class="dropdown-item py-2" href="{{ route('faculty.create') }}"><i class="bi bi-person-workspace me-2 text-success"></i> Faculty Collection</a></li>
                         <li><a class="dropdown-item py-2" href="{{ route('sponsors.create') }}"><i class="bi bi-gift me-2 text-warning"></i> Sponsor Contribution</a></li>
@@ -407,10 +431,10 @@
 
                 <!-- Admin Profile & Logout -->
                 <div class="dropdown ms-1">
-                    <button class="btn btn-light border btn-sm dropdown-toggle px-3 py-2 fw-bold text-dark" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <button class="btn btn-light border btn-sm dropdown-toggle px-3 py-2 fw-bold text-dark shadow-sm" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                         <i class="bi bi-person-circle me-1 text-warning fs-6"></i> {{ Auth::user()->name ?? 'Admin' }}
                     </button>
-                    <ul class="dropdown-menu dropdown-menu-end shadow-sm border-0">
+                    <ul class="dropdown-menu dropdown-menu-end shadow border-0">
                         <li><span class="dropdown-item-text text-muted small"><i class="bi bi-shield-check text-success me-1"></i> Super Admin</span></li>
                         <li><hr class="dropdown-divider"></li>
                         <li>
@@ -425,7 +449,7 @@
                 </div>
                 @else
                 <!-- Admin Login Button for Guests -->
-                <a href="{{ route('login') }}" class="btn btn-warning text-dark fw-bold btn-sm px-3 py-2">
+                <a href="{{ route('login') }}" class="btn btn-warning text-dark fw-bold btn-sm px-3 py-2 shadow-sm">
                     <i class="bi bi-box-arrow-in-right me-1"></i> Admin Login
                 </a>
                 @endauth
@@ -457,12 +481,29 @@
             @yield('content')
         </main>
 
-        <!-- Light Footer -->
-        <footer class="py-3 bg-white border-top text-center no-print mt-auto">
+        <!-- Stylish & Professional Footer View -->
+        <footer class="app-footer no-print">
             <div class="container-fluid">
-                <p class="mb-0 text-muted small fw-medium">
-                    <strong>Ganesh Chaturthi Celebration 2026</strong> — Hostel Collection & Expense Tracker
-                </p>
+                <div class="row align-items-center gy-3">
+                    <div class="col-12 col-md-7">
+                        <div class="d-flex align-items-center">
+                            <!-- Footer Favicon SVG Logo Image -->
+                            <img src="{{ asset('favicon.svg') }}" width="36" height="36" alt="Ganesh Logo" class="me-3 flex-shrink-0">
+                            <div>
+                                <div class="footer-brand">Ganesh Chaturthi 2026</div>
+                                <div class="footer-sub">Collection & Expense Tracker • GEC Palanpur</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr class="my-3 text-secondary opacity-25">
+                <div class="row align-items-center">
+                    <div class="col-12 text-center">
+                        <p class="mb-0 text-muted small fw-medium">
+                            <strong>Ganesh Chaturthi 2026</strong> | Government Engineering College, Palanpur
+                        </p>
+                    </div>
+                </div>
             </div>
         </footer>
     </div>

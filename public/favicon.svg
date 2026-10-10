@@ -1,0 +1,36 @@
+<svg width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="gFav" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fbbf24" />
+      <stop offset="50%" stop-color="#f59e0b" />
+      <stop offset="100%" stop-color="#d97706" />
+    </linearGradient>
+    <linearGradient id="crownFav" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#fbbf24" />
+      <stop offset="100%" stop-color="#b45309" />
+    </linearGradient>
+    <radialGradient id="haloFav" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#fef3c7" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#f59e0b" stop-opacity="0.2"/>
+    </radialGradient>
+  </defs>
+  <circle cx="50" cy="50" r="46" fill="url(#haloFav)" stroke="#fcd34d" stroke-width="2" />
+  <circle cx="50" cy="50" r="42" stroke="#f59e0b" stroke-width="1" stroke-dasharray="3 3" opacity="0.6"/>
+  <path d="M50 8 L59 26 L41 26 Z" fill="url(#crownFav)" stroke="#92400e" stroke-width="1.2"/>
+  <path d="M50 14 L56 26 L44 26 Z" fill="#fbbf24"/>
+  <circle cx="50" cy="18" r="2.5" fill="#dc2626"/>
+  <path d="M35 38 C20 30 14 44 26 54 C34 60 38 52 38 42 Z" fill="url(#gFav)"/>
+  <path d="M65 38 C80 30 86 44 74 54 C66 60 62 52 62 42 Z" fill="url(#gFav)"/>
+  <path d="M35 40 C24 35 20 45 28 51" stroke="#b45309" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+  <path d="M65 40 C76 35 80 45 72 51" stroke="#b45309" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+  <ellipse cx="50" cy="46" rx="14" ry="16" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+  <path d="M46 34 Q50 31 54 34 L53 38 Q50 41 47 38 Z" fill="#dc2626"/>
+  <line x1="50" y1="31" x2="50" y2="40" stroke="#fbbf24" stroke-width="2" stroke-linecap="round"/>
+  <circle cx="50" cy="35" r="1" fill="#ffffff"/>
+  <ellipse cx="43" cy="44" rx="2.5" ry="1.2" fill="#78350f"/>
+  <ellipse cx="57" cy="44" rx="2.5" ry="1.2" fill="#78350f"/>
+  <path d="M50 48 Q49 58 55 64 Q62 70 68 64 Q72 59 66 56 Q62 54 60 58" stroke="url(#gFav)" stroke-width="5.5" stroke-linecap="round" fill="none"/>
+  <circle cx="68" cy="62" r="3.5" fill="#f59e0b" stroke="#b45309" stroke-width="0.8"/>
+  <path d="M68 59.5 L69.5 63 L66.5 63 Z" fill="#dc2626"/>
+  <path d="M44 51 L40 54" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round"/>
+</svg>
