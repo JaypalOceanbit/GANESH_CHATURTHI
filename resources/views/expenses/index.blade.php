@@ -1,13 +1,13 @@
 @extends('layouts.app')
 
-@section('title', 'Celebration Expenses — Ganesh Chaturthi 2026')
+@section('title', 'Expenses — Ganesh Chaturthi 2026')
 
 @section('content')
 
 <!-- Header & Actions -->
 <div class="d-flex flex-column flex-md-row align-items-md-center justify-content-between mb-4">
     <div>
-        <h2 class="h3 fw-bold mb-1"><i class="bi bi-receipt-cutoff text-danger me-2"></i> Celebration Expenses</h2>
+        <h2 class="h3 fw-bold mb-1"><i class="bi bi-receipt-cutoff text-danger me-2"></i> Expenses</h2>
     </div>
     <div class="mt-3 mt-md-0 d-flex gap-2 no-print">
         <a href="{{ route('expenses.export', request()->all()) }}" class="btn btn-outline-secondary btn-sm fw-medium">
@@ -113,7 +113,7 @@
                     <th>PRODUCT / DESCRIPTION</th>
                     <th style="width: 150px;">CATEGORY</th>
                     <th class="text-end" style="width: 130px;">PRICE (₹)</th>
-                    <th class="text-center" style="width: 110px;">BILL PHOTO</th>
+                    <!-- <th class="text-center" style="width: 110px;">BILL PHOTO</th> -->
                     @auth
                     <th class="text-center no-print" style="width: 130px;">ACTION</th>
                     @endauth
@@ -124,14 +124,14 @@
                     <tr>
                         <td class="fw-bold text-muted">{{ $loop->iteration + ($expenses->currentPage() - 1) * $expenses->perPage() }}</td>
                         <td class="text-nowrap small text-muted">{{ $expense->expense_date->format('d/m/Y') }}</td>
-                        <td class="fw-bold text-dark fs-6">{{ $expense->product_name }}</td>
+                        <td class="fw text-dark fs-6">{{ $expense->product_name }}</td>
                         <td>
                             <span class="badge bg-light text-dark border">
                                 {{ $expense->category ? $expense->category->name : 'Uncategorized' }}
                             </span>
                         </td>
-                        <td class="text-end fw-bold fs-6 text-dark">₹{{ number_format($expense->price, 0) }}</td>
-                        <td class="text-center">
+                        <td class="text-end fw fs-6 text-dark">₹{{ number_format($expense->price, 0) }}</td>
+                        <!-- <td class="text-center">
                             @if($expense->bill_image)
                                 <a href="{{ asset('storage/' . $expense->bill_image) }}" target="_blank" class="badge bg-info-subtle text-info-emphasis border text-decoration-none py-1 px-2">
                                     <i class="bi bi-image me-1"></i> View Bill
@@ -139,7 +139,7 @@
                             @else
                                 <span class="text-muted small">—</span>
                             @endif
-                        </td>
+                        </td> -->
                         @auth
                         <td class="text-center no-print">
                             <div class="btn-group btn-group-sm" role="group">

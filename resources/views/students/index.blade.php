@@ -27,7 +27,7 @@
         <div class="col-12 col-md-9">
             <div class="input-group">
                 <span class="input-group-text bg-white text-muted border-end-0"><i class="bi bi-search"></i></span>
-                <input type="text" name="search" class="form-control border-start-0" placeholder="Search by student/group name, members, room no, or notes..." value="{{ request('search') }}">
+                <input type="text" name="search" class="form-control border-start-0" placeholder="Search" value="{{ request('search') }}">
             </div>
         </div>
         <div class="col-12 col-md-3 d-flex gap-2">
@@ -46,10 +46,10 @@
             <thead>
                 <tr>
                     <th style="width: 60px;">SR</th>
-                    <th>STUDENT / GROUP NAME</th>
-                    <th style="width: 120px;">ROOM NO.</th>
+                    <th>STUDENT NAME</th>
+                    <!-- <th style="width: 120px;">ROOM NO.</th> -->
                     <th class="text-end" style="width: 150px;">AMOUNT (₹)</th>
-                    <th style="width: 140px;">DATE</th>
+                    <!-- <th style="width: 140px;">DATE</th> -->
                     @auth
                     <th class="text-center no-print" style="width: 140px;">ACTION</th>
                     @endauth
@@ -60,7 +60,7 @@
                     <tr>
                         <td class="fw-bold text-muted">{{ $loop->iteration + ($students->currentPage() - 1) * $students->perPage() }}</td>
                         <td>
-                            <div class="fw-bold text-dark fs-6 d-flex align-items-center">
+                            <div class="fw text-dark fs-6 d-flex align-items-center">
                                 {{ $student->name }}
                                 @if($student->is_group)
                                     <span class="badge bg-info-subtle text-info-emphasis border ms-2 small">
@@ -74,11 +74,11 @@
                                 </div>
                             @endif
                         </td>
-                        <td><span class="badge bg-light text-dark border px-2 py-1 fs-6">{{ $student->room }}</span></td>
-                        <td class="text-end fw-bold fs-6 text-success">₹{{ number_format($student->amount, 0) }}</td>
-                        <td class="text-muted small">
+                        <!-- <td><span class="badge bg-light text-dark border px-2 py-1 fs-6">{{ $student->room }}</span></td> -->
+                        <td class="text-end fw fs-6 text-success">₹{{ number_format($student->amount, 0) }}</td>
+                        <!-- <td class="text-muted small">
                             {{ $student->collection_date ? $student->collection_date->format('d/m/Y') : 'N/A' }}
-                        </td>
+                        </td> -->
                         @auth
                         <td class="text-center no-print">
                             <div class="btn-group btn-group-sm" role="group">
@@ -103,7 +103,7 @@
                     <tr>
                         <td colspan="{{ auth()->check() ? 6 : 5 }}" class="text-center py-5 text-muted">
                             <i class="bi bi-inbox fs-1 d-block mb-2 text-secondary"></i>
-                            No student collection records found.
+                            No data found.
                         </td>
                     </tr>
                 @endforelse

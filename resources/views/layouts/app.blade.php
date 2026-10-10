@@ -328,7 +328,7 @@
             </a>
 
             <a class="sidebar-link {{ request()->routeIs('sponsors.*') ? 'active' : '' }}" href="{{ route('sponsors.index') }}">
-                <i class="bi bi-gift-fill"></i> Sponsors & Items
+                <i class="bi bi-gift-fill"></i> Sponsors
             </a>
 
             <a class="sidebar-link {{ request()->routeIs('collections.index') ? 'active' : '' }}" href="{{ route('collections.index') }}">
@@ -338,7 +338,7 @@
             <div class="sidebar-heading">Expense Management</div>
 
             <a class="sidebar-link {{ request()->routeIs('expenses.*') ? 'active' : '' }}" href="{{ route('expenses.index') }}">
-                <i class="bi bi-receipt-cutoff"></i> Celebration Expenses
+                <i class="bi bi-receipt-cutoff"></i> Expenses
             </a>
 
             <a class="sidebar-link {{ request()->routeIs('expense-categories.*') ? 'active' : '' }}" href="{{ route('expense-categories.index') }}">

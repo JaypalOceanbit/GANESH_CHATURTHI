@@ -7,8 +7,7 @@
 <!-- Page Title & Quick Action Buttons -->
 <div class="d-flex flex-column flex-md-row align-items-md-center justify-content-between mb-4">
     <div>
-        <h2 class="h4 fw-bold mb-1">Celebration Dashboard</h2>
-        <p class="text-muted mb-0 small">Real-time summary of student/faculty fund collections, sponsors, and celebration expenses.</p>
+        <h2 class="h4 fw-bold mb-1">Dashboard</h2>
     </div>
     @auth
     <div class="mt-3 mt-md-0 d-flex flex-wrap gap-2 no-print">
@@ -35,7 +34,6 @@
         <div class="metric-card border-start border-4 border-primary">
             <div class="metric-label">Student Collection</div>
             <div class="metric-value text-primary">₹{{ number_format($studentTotal, 0) }}</div>
-            <div class="text-muted small">Hostel students</div>
         </div>
     </div>
 
@@ -44,16 +42,14 @@
         <div class="metric-card border-start border-4 border-success">
             <div class="metric-label">Faculty Collection</div>
             <div class="metric-value text-success">₹{{ number_format($facultyTotal, 0) }}</div>
-            <div class="text-muted small">Faculty & staff</div>
         </div>
     </div>
 
     <!-- Card 3: Total Collection -->
     <div class="col-12 col-sm-6 col-xl-2">
         <div class="metric-card border-start border-4 border-warning">
-            <div class="metric-label">Total Cash Collection</div>
+            <div class="metric-label">Total Collection</div>
             <div class="metric-value text-dark">₹{{ number_format($totalCollection, 0) }}</div>
-            <div class="text-muted small">Total cash raised</div>
         </div>
     </div>
 
@@ -62,7 +58,6 @@
         <div class="metric-card border-start border-4 border-info">
             <div class="metric-label">Total Sponsors</div>
             <div class="metric-value text-info">{{ $sponsorCount }}</div>
-            <div class="text-muted small">Item contributors</div>
         </div>
     </div>
 
@@ -71,7 +66,6 @@
         <div class="metric-card border-start border-4 border-danger">
             <div class="metric-label">Total Expenses</div>
             <div class="metric-value text-danger">₹{{ number_format($totalExpenses, 0) }}</div>
-            <div class="text-muted small">Celebration cost</div>
         </div>
     </div>
 
@@ -82,7 +76,6 @@
             <div class="metric-value {{ $balance >= 0 ? 'text-success' : 'text-danger' }}">
                 ₹{{ number_format($balance, 0) }}
             </div>
-            <div class="text-muted small">{{ $balance >= 0 ? 'Surplus fund' : 'Deficit / Over-spent' }}</div>
         </div>
     </div>
 </div>
@@ -102,7 +95,7 @@
 
                 <div class="bg-light p-3 rounded-3">
                     <div class="d-flex justify-content-between align-items-center mb-2">
-                        <span class="small fw-semibold text-muted">Students Contribution</span>
+                        <span class="small fw-semibold text-muted">Students Collections</span>
                         <strong class="text-primary">₹{{ number_format($studentTotal, 0) }}</strong>
                     </div>
                     <div class="progress mb-3" style="height: 6px;">
@@ -110,7 +103,7 @@
                     </div>
 
                     <div class="d-flex justify-content-between align-items-center mb-2">
-                        <span class="small fw-semibold text-muted">Faculty Contribution</span>
+                        <span class="small fw-semibold text-muted">Faculty Collections</span>
                         <strong class="text-success">₹{{ number_format($facultyTotal, 0) }}</strong>
                     </div>
                     <div class="progress" style="height: 6px;">
@@ -125,7 +118,7 @@
     <div class="col-12 col-lg-7">
         <div class="ui-card h-100">
             <div class="ui-card-header d-flex align-items-center justify-content-between">
-                <h5 class="h6 fw-bold mb-0"><i class="bi bi-bar-chart-fill text-warning me-2"></i> Expenses Grouped by Category</h5>
+                <h5 class="h6 fw-bold mb-0"><i class="bi bi-bar-chart-fill text-warning me-2"></i> Expenses by Category</h5>
                 <a href="{{ route('expenses.index') }}" class="small text-decoration-none fw-semibold">View All Expenses →</a>
             </div>
             <div class="p-3">
@@ -139,18 +132,13 @@
                             <tr>
                                 <th>Category</th>
                                 <th class="text-end">Total Spent</th>
-                                <th class="text-end">Share</th>
                             </tr>
                         </thead>
                         <tbody>
                             @forelse($categoryTotals as $cat)
-                                @php
-                                    $percent = $totalExpenses > 0 ? round(($cat->expenses_sum_price / $totalExpenses) * 100, 1) : 0;
-                                @endphp
                                 <tr>
                                     <td class="fw-medium text-dark"><i class="bi bi-tag-fill me-1 text-warning"></i> {{ $cat->name }}</td>
                                     <td class="text-end fw-bold">₹{{ number_format($cat->expenses_sum_price, 0) }}</td>
-                                    <td class="text-end text-muted small">{{ $percent }}%</td>
                                 </tr>
                             @empty
                                 <tr>

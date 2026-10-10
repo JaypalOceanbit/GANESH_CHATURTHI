@@ -43,7 +43,7 @@
 
                 <!-- Sponsor / Purpose -->
                 <div class="mb-3">
-                    <label for="sponsor" class="form-label fw-bold">Sponsor / Purpose</label>
+                    <label for="sponsor" class="form-label fw-bold">Sponsor</label>
                     <input type="text" name="sponsor" id="sponsor" class="form-control @error('sponsor') is-invalid @enderror" value="{{ old('sponsor', $faculty->sponsor) }}" placeholder="Enter Sponsor Purpose (Optional)">
                     @error('sponsor')
                         <div class="invalid-feedback">{{ $message }}</div>

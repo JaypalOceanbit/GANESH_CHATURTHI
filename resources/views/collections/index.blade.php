@@ -8,7 +8,6 @@
 <div class="d-flex flex-column flex-md-row align-items-md-center justify-content-between mb-4">
     <div>
         <h2 class="h3 fw-bold mb-1"><i class="bi bi-journal-bookmark-fill text-amber me-2"></i> Combined Collection History</h2>
-        <p class="text-muted mb-0 small">Ledger of all student and faculty contributions sorted by highest amount first.</p>
     </div>
     <div class="mt-3 mt-md-0 d-flex gap-2 no-print">
         <button onclick="window.print()" class="btn btn-outline-secondary btn-sm">
@@ -21,20 +20,19 @@
 <div class="row g-3 mb-4">
     <div class="col-12 col-md-4">
         <div class="card card-custom p-3 border-start border-4 border-warning">
-            <span class="text-muted small fw-bold text-uppercase">Total Cash Raised</span>
+            <span class="text-muted small fw-bold text-uppercase">Total Collection</span>
             <h4 class="fw-bold mb-0 text-dark">₹{{ number_format($totalCollection, 0) }}</h4>
-            <span class="text-muted small">Combined student + faculty funds</span>
         </div>
     </div>
     <div class="col-12 col-sm-6 col-md-4">
         <div class="card card-custom p-3">
-            <span class="text-muted small fw-bold text-uppercase">Student Total</span>
+            <span class="text-muted small fw-bold text-uppercase">Student Collections</span>
             <h4 class="fw-bold mb-0 text-primary">₹{{ number_format($studentTotal, 0) }} <small class="fs-6 text-muted">({{ $studentCount }} contributors)</small></h4>
         </div>
     </div>
     <div class="col-12 col-sm-6 col-md-4">
         <div class="card card-custom p-3">
-            <span class="text-muted small fw-bold text-uppercase">Faculty Total</span>
+            <span class="text-muted small fw-bold text-uppercase">Faculty Collections</span>
             <h4 class="fw-bold mb-0 text-success">₹{{ number_format($facultyTotal, 0) }} <small class="fs-6 text-muted">({{ $facultyCount }} faculty)</small></h4>
         </div>
     </div>
@@ -60,7 +58,7 @@
 
         <!-- Search Input -->
         <div class="col-12 col-md-5">
-            <input type="text" name="search" class="form-control form-control-sm" placeholder="Search contributor/group name or room no..." value="{{ $search }}">
+            <input type="text" name="search" class="form-control form-control-sm" placeholder="Search" value="{{ $search }}">
             <input type="hidden" name="type" value="{{ $type }}">
         </div>
 
@@ -77,7 +75,7 @@
 @if($type === 'all' || $type === 'students')
 <div class="card card-custom p-0 mb-4 overflow-hidden">
     <div class="card-header bg-primary text-white py-2 px-3 fw-bold d-flex justify-content-between align-items-center">
-        <span><i class="bi bi-mortarboard-fill me-2"></i> Student Collections Ledger (Highest First)</span>
+        <span><i class="bi bi-mortarboard-fill me-2"></i> Student Collections Ledger</span>
         <span class="badge bg-light text-primary fs-6">₹{{ number_format($studentTotal, 0) }}</span>
     </div>
     <div class="table-responsive">
@@ -85,11 +83,11 @@
             <thead>
                 <tr>
                     <th style="width: 60px;">SR</th>
-                    <th>STUDENT / GROUP NAME</th>
-                    <th>ROOM</th>
+                    <th>STUDENT NAME</th>
+                    <!-- <th>ROOM</th> -->
                     <th class="text-end">AMOUNT (₹)</th>
-                    <th>DATE</th>
-                    <th>NOTES</th>
+                    <!-- <th>DATE</th> -->
+                    <!-- <th>NOTES</th> -->
                 </tr>
             </thead>
             <tbody>
@@ -105,14 +103,14 @@
                                 <div class="text-muted small fw-normal">Members: {{ $st->group_members }}</div>
                             @endif
                         </td>
-                        <td><span class="badge bg-primary-subtle text-primary border px-2 py-1">{{ $st->room }}</span></td>
+                        <!-- <td><span class="badge bg-primary-subtle text-primary border px-2 py-1">{{ $st->room }}</span></td> -->
                         <td class="text-end fw-bold text-success">₹{{ number_format($st->amount, 0) }}</td>
-                        <td class="text-muted small">{{ $st->collection_date ? $st->collection_date->format('d/m/Y') : 'N/A' }}</td>
-                        <td class="text-muted small">{{ $st->notes ?: '—' }}</td>
+                        <!-- <td class="text-muted small">{{ $st->collection_date ? $st->collection_date->format('d/m/Y') : 'N/A' }}</td> -->
+                        <!-- <td class="text-muted small">{{ $st->notes ?: '—' }}</td> -->
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="6" class="text-center py-4 text-muted">No student collections found.</td>
+                        <td colspan="6" class="text-center py-4 text-muted">No data found.</td>
                     </tr>
                 @endforelse
             </tbody>
@@ -124,7 +122,7 @@
 @if($type === 'all' || $type === 'faculty')
 <div class="card card-custom p-0 mb-4 overflow-hidden">
     <div class="card-header bg-success text-white py-2 px-3 fw-bold d-flex justify-content-between align-items-center">
-        <span><i class="bi bi-person-workspace me-2"></i> Faculty Collections Ledger (Highest First)</span>
+        <span><i class="bi bi-person-workspace me-2"></i> Faculty Collections Ledger</span>
         <span class="badge bg-light text-success fs-6">₹{{ number_format($facultyTotal, 0) }}</span>
     </div>
     <div class="table-responsive">
@@ -133,10 +131,10 @@
                 <tr>
                     <th style="width: 60px;">SR</th>
                     <th>FACULTY NAME</th>
-                    <th>SPONSOR / PURPOSE</th>
+                    <th>SPONSOR</th>
                     <th class="text-end">AMOUNT (₹)</th>
-                    <th>DATE</th>
-                    <th>NOTES</th>
+                    <!-- <th>DATE</th> -->
+                    <!-- <th>NOTES</th> -->
                 </tr>
             </thead>
             <tbody>
@@ -152,12 +150,12 @@
                             @endif
                         </td>
                         <td class="text-end fw-bold text-success">₹{{ number_format($fc->amount, 0) }}</td>
-                        <td class="text-muted small">{{ $fc->collection_date ? $fc->collection_date->format('d/m/Y') : 'N/A' }}</td>
-                        <td class="text-muted small">{{ $fc->notes ?: '—' }}</td>
+                        <!-- <td class="text-muted small">{{ $fc->collection_date ? $fc->collection_date->format('d/m/Y') : 'N/A' }}</td> -->
+                        <!-- <td class="text-muted small">{{ $fc->notes ?: '—' }}</td> -->
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="6" class="text-center py-4 text-muted">No faculty collections found.</td>
+                        <td colspan="6" class="text-center py-4 text-muted">No data found.</td>
                     </tr>
                 @endforelse
             </tbody>

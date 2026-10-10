@@ -24,7 +24,7 @@
         <div class="col-12 col-md-9">
             <div class="input-group">
                 <span class="input-group-text bg-white text-muted border-end-0"><i class="bi bi-search"></i></span>
-                <input type="text" name="search" class="form-control border-start-0" placeholder="Search by sponsor name, item, or notes..." value="{{ request('search') }}">
+                <input type="text" name="search" class="form-control border-start-0" placeholder="Search" value="{{ request('search') }}">
             </div>
         </div>
         <div class="col-12 col-md-3 d-flex gap-2">
@@ -44,8 +44,8 @@
                 <tr>
                     <th style="width: 60px;">SR</th>
                     <th>SPONSOR NAME</th>
-                    <th>SPONSOR ITEM / CONTRIBUTION</th>
-                    <th style="width: 140px;">DATE</th>
+                    <th>SPONSOR ITEM</th>
+                    <!-- <th style="width: 140px;">DATE</th> -->
                     <th>NOTES</th>
                     @auth
                     <th class="text-center no-print" style="width: 150px;">ACTION</th>
@@ -62,9 +62,9 @@
                                 <i class="bi bi-box-seam me-1"></i> {{ $sponsor->sponsor_item }}
                             </span>
                         </td>
-                        <td class="text-muted small">
+                        <!-- <td class="text-muted small">
                             {{ $sponsor->sponsor_date ? $sponsor->sponsor_date->format('d/m/Y') : 'N/A' }}
-                        </td>
+                        </td> -->
                         <td class="text-muted small">{{ $sponsor->notes ?: '—' }}</td>
                         @auth
                         <td class="text-center no-print">

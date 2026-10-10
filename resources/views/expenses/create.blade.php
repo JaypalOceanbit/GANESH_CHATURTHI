@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Add Celebration Expense — Ganesh Chaturthi 2026')
+@section('title', 'Add Expense — Ganesh Chaturthi 2026')
 
 @section('content')
 
@@ -9,7 +9,7 @@
         <div class="card card-custom p-4">
             <div class="d-flex align-items-center justify-content-between mb-3 pb-3 border-bottom">
                 <h3 class="h4 fw-bold mb-0 text-danger">
-                    <i class="bi bi-receipt-cutoff me-2"></i> Add Celebration Expense
+                    <i class="bi bi-receipt-cutoff me-2"></i> Add Expense
                 </h3>
                 <a href="{{ route('expenses.index') }}" class="btn btn-sm btn-outline-secondary">
                     <i class="bi bi-arrow-left me-1"></i> Back

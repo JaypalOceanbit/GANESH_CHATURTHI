@@ -27,7 +27,7 @@
         <div class="col-12 col-md-9">
             <div class="input-group">
                 <span class="input-group-text bg-white text-muted border-end-0"><i class="bi bi-search"></i></span>
-                <input type="text" name="search" class="form-control border-start-0" placeholder="Search by faculty name, purpose, or notes..." value="{{ request('search') }}">
+                <input type="text" name="search" class="form-control border-start-0" placeholder="Search" value="{{ request('search') }}">
             </div>
         </div>
         <div class="col-12 col-md-3 d-flex gap-2">
@@ -47,9 +47,9 @@
                 <tr>
                     <th style="width: 60px;">SR</th>
                     <th>FACULTY NAME</th>
-                    <th class="text-end" style="width: 140px;">AMOUNT (₹)</th>
-                    <th>SPONSOR / PURPOSE</th>
-                    <th style="width: 140px;">DATE</th>
+                    <th class="text" style="width: 120px;">AMOUNT (₹)</th>
+                    <th>SPONSOR</th>
+                    <!-- <th style="width: 140px;">DATE</th> -->
                     @auth
                     <th class="text-center no-print" style="width: 150px;">ACTION</th>
                     @endauth
@@ -58,9 +58,9 @@
             <tbody>
                 @forelse($facultyMembers as $faculty)
                     <tr>
-                        <td class="fw-bold text-muted">{{ $loop->iteration + ($facultyMembers->currentPage() - 1) * $facultyMembers->perPage() }}</td>
-                        <td class="fw-bold text-dark fs-6">{{ $faculty->name }}</td>
-                        <td class="text-end fw-bold fs-6 text-success">₹{{ number_format($faculty->amount, 0) }}</td>
+                        <td class="fw text-muted">{{ $loop->iteration + ($facultyMembers->currentPage() - 1) * $facultyMembers->perPage() }}</td>
+                        <td class="fw text-dark fs-6">{{ $faculty->name }}</td>
+                        <td class="text fw fs-6 text-success">₹{{ number_format($faculty->amount, 0) }}</td>
                         <td>
                             @if($faculty->sponsor)
                                 <span class="badge bg-success-subtle text-success-emphasis border border-success-subtle px-2 py-1 fs-6">
@@ -70,9 +70,9 @@
                                 <span class="text-muted small">—</span>
                             @endif
                         </td>
-                        <td class="text-muted small">
+                        <!-- <td class="text-muted small">
                             {{ $faculty->collection_date ? $faculty->collection_date->format('d/m/Y') : 'N/A' }}
-                        </td>
+                        </td> -->
                         @auth
                         <td class="text-center no-print">
                             <div class="btn-group btn-group-sm" role="group">
@@ -97,7 +97,7 @@
                     <tr>
                         <td colspan="{{ auth()->check() ? 6 : 5 }}" class="text-center py-5 text-muted">
                             <i class="bi bi-inbox fs-1 d-block mb-2 text-secondary"></i>
-                            No faculty collection records found.
+                            No data found.
                         </td>
                     </tr>
                 @endforelse
